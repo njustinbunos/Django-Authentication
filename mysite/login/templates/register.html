@@ -1,6 +1,104 @@
-{% extends 'base.html' %}
-{% block title %}{{title}}{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
 
 {% block body %}
-<p>register page</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="form-container">
+                <form action="/register/" method="post">
+                        {% csrf_token %}
+                        <div class="text-center mb-4">
+                            <h2 class="h4 mb-0">Create Account</h2>
+                        </div>
+                        
+                        <!-- Display form errors if any -->
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label fw-bold">Username</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                name="username"
+                                placeholder="Enter Username"
+                                required
+                            >
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-bold">Password</label>
+                            <div class="input-group">
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter Password"
+                                    required
+                                >
+                                <span class="input-group-text">
+                                    <i class="bi bi-eye-slash" id="showPassword" style="cursor:pointer;"></i>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Confirm Password -->
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label fw-bold">Confirm Password</label>
+                            <div class="input-group">
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="confirm_password"
+                                    name="confirm_password"
+                                    placeholder="Confirm Password"
+                                    required
+                                >
+                                <span class="input-group-text">
+                                    <i class="bi bi-eye-slash" id="showConfirmPassword" style="cursor:pointer;"></i>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Requirements -->
+                        <div class="mb-3">
+                            <p class="mb-1">Requirements:</p>
+                            <ul class="text-muted small mb-0">
+                                <li>Password must be at least 8 characters</li>
+                                <li>Username must not contain invalid characters</li>
+                                <li>Password must contain at least one uppercase, lowercase, and digit</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Submit -->
+                        <div class="d-grid gap-2 mb-3">
+                            <button type="submit" class="btn btn-custom btn-lg">Register</button>
+                        </div>
+                        
+                        <!-- Login link -->
+                        <div class="text-center">
+                            <span class="text-muted">
+                                Already registered?
+                                <a href="/login/" class="text-info text-decoration-none">Sign in here</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load JS at the bottom so DOM is ready -->
+<script src="{% static 'js/password.js' %}"></script>
 {% endblock %}
