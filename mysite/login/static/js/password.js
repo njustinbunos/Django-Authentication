@@ -1,19 +1,26 @@
-const password = document.querySelector('#password');
-const confirmPassword = document.querySelector('#confirm_password');
-const showPassword = document.querySelector('#showPassword');
-const showConfirmPassword = document.querySelector('#showConfirmPassword');
+// Get all password input elements and their toggle buttons
+const passwordInput = document.querySelector('#password1');
+const confirmPasswordInput = document.querySelector('#password2');
+const showPasswordBtn = document.querySelector('#showPassword');
+const showConfirmPasswordBtn = document.querySelector('#showConfirmPassword');
 
-function toggleVisibility(input, icon) {
-    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-    input.setAttribute('type', type);
-    icon.classList.toggle('bi-eye');
-    icon.classList.toggle('bi-eye-slash');
+function togglePasswordVisibility(input, icon) {
+    if (!input || !icon) return;
+    
+    const isPassword = input.getAttribute('type') === 'password';
+    input.setAttribute('type', isPassword ? 'text' : 'password');
+    
+    icon.classList.toggle('bi-eye', !isPassword);
+    icon.classList.toggle('bi-eye-slash', isPassword);
 }
 
-if (password && showPassword) {
-    showPassword.addEventListener('click', () => toggleVisibility(password, showPassword));
+if (passwordInput && showPasswordBtn) {
+    showPasswordBtn.addEventListener('click', () => {
+        togglePasswordVisibility(passwordInput, showPasswordBtn);
+    });
 }
-
-if (confirmPassword && showConfirmPassword) {
-    showConfirmPassword.addEventListener('click', () => toggleVisibility(confirmPassword, showConfirmPassword));
+if (confirmPasswordInput && showConfirmPasswordBtn) {
+    showConfirmPasswordBtn.addEventListener('click', () => {
+        togglePasswordVisibility(confirmPasswordInput, showConfirmPasswordBtn);
+    });
 }
