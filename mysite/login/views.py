@@ -6,7 +6,7 @@ from django.contrib import messages
 def index(request):
     if not request.user.is_authenticated: 
         return redirect('login')
-    return render(request, 'templates/index.html')
+    return render(request, 'index.html')
 
 def login_view(request):
     if request.method == "POST":
@@ -18,7 +18,7 @@ def login_view(request):
             return redirect('index')
         else:
             messages.error(request, 'Invalid username or password')
-    return render(request, 'templates/login.html',{'title':'Log in'})
+    return render(request, 'login.html',{'title':'Log in'})
 
 def register(request):
     if request.method == 'POST':
